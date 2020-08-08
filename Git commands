@@ -1,0 +1,61 @@
+COMANDOS DE INICIO
+--> git config --global user.email "contact@hotmail.com"
+--> git config --global user.name "nombre"
+--> git init
+	Para decirle a nuestro proyecto que va a trabajar con git
+--> git status
+	Para ver el estado de nuestro proyecto/git
+
+COMANDOS BASICOS
+--> git add . 
+	Para añadir los archivos o docs al repo
+--> git commit -m "..."
+	Para crear un snapshot - para pasar del staying area al repo
+	--> Escribir la letra i para que deje escribir despues de un commit.
+		Luego escribir la descripcion y luego :wq
+--> git log
+	Para ver todos los commits que hemos creado
+    git log --online --decorate --all --graph
+	lo mismo que el anterior pero mas resumido y org.
+--> git push
+	Para subirlo al repo remoto
+--> git pull
+	Para ver los cambios de los demas developers
+
+
+COMANDOS ESPECIALES
+--> git checkout -- nombre_del_archivo
+	Para revertir los cambios de los archivos
+--> git diff
+	Para ver las diferencias hechas en los archivos
+
+COMANDOS DE RAMAS
+--> git branch
+	Para ver que ramas existen en el proyecto
+--> git branch Nombre_de_la_nueva_rama
+	Para crear una nueva version o rama
+    git checkout -b nombre_de_la_nueva_rama
+	Para crear y abrir la rama de una vez (al mismo tiempo)
+--> git checkout Nombre_de_la__rama_a_la_que_quiero_moverme
+	Para abrir una rama y navegar en ella
+--> git branch -d nombre_rama
+	Para eliminar rama completa
+--> git merge nombre_rama2
+	Para ahcer un merge tengo que estar en la rama que 
+	   quiero que absorba los cambios
+
+COMANDOS PARA REPO REMOTO
+--> git clone www.link_del_repo.com
+	Crear copia al servidor local
+
+
+COMANDOS PARA REPO (para subirlo a un repo que aun no habiamos creado)
+--> git remote add origin http://githube/....
+	Para decir cual es el origen o en donde se va a almacenar todo el código.
+	(esto es para colocar dentro de un proyecto ya exitente en una carpeta local con el bash)
+--> git push -u origin master
+	Para decirle "ingresa los archivos a ese repo"
+
+git fetch --all --> para jalar todas las ramas del repo y todos sus archivos
+
+
