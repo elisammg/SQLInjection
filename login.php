@@ -3,13 +3,11 @@
    session_start();
    
    if($_SERVER["REQUEST_METHOD"] == "POST") {
-      // username and password sent from form 
-      
       $myusername = mysqli_real_escape_string($db,$_POST['user']);
       $mypassword = mysqli_real_escape_string($db,$_POST['password']); 
       
 
-      $sql = "SELECT id FROM usuarios WHERE user = '$myusername' and password = '$mypassword'";
+      $sql = "SELECT * FROM usuarios WHERE user = '$myusername' and password = '$mypassword'";
       $result = mysqli_query($db,$sql);
       $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
       
@@ -60,19 +58,19 @@
 				</div>
 			</div>
 			<div class="card-body">
-				<form action="" method="POST">
+				<form action="backend.php" method="POST">
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" name="user" class="form-control" placeholder="username" required="required"/>
+						<input type="text" name="user" class="form-control" placeholder="username"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="password" class="form-control" placeholder="password" required="required"/>
+						<input type="password" name="password" class="form-control" placeholder="password"/>
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
