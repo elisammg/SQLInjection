@@ -8,15 +8,15 @@
 
 		$opera = $conn->query("SELECT * FROM usuarios WHERE user = '{$user}' and password = '{$password}'");
 		
-		if ($opera->rowCount()) {
+		if ($opera) {
 			$_SESSION['login_user'] = $user;
 			
 			header("location: welcome.php");
-			$comando = 'console.log("hgfhf");';
-			echo '<script>'. $comando . '</script>';
-			/* while ($row = $opera->fetch()) {
-				echo $row['user']."<br>";
-			} */
+			
+			while ($row = $opera->fetch()) {
+				$comando = 'console.log('. json_encode($row) .');';
+				echo '<script>'. $comando . '</script>';
+			}
 		} else {
 			$error = "your User or Password are incorrect";
 			echo "<script>alert('$error');</script>"; 
