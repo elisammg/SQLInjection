@@ -20,15 +20,9 @@
                <?php 
                echo ($user_check);
                   while ($row = $ses_sql->fetch()) {
-                     /* echo $row['user']."<br>";
-                     echo $row['password']."<br>"; */
                      $comando = 'console.log('. json_encode($row) .');';
                      echo '<script>'. $comando . '</script>';
                   }
-                  /* while ($row = $opera->fetch()) {
-                     $comando = 'console.log('. json_encode($row) .');';
-                     echo '<script>'. $comando . '</script>';
-                  } */
                ?>
             </h2>
          </i>
