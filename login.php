@@ -1,27 +1,54 @@
 <?php
 	include("connection.php");
 	session_start();
-	
-	if ($_SERVER["REQUEST_METHOD"] == "POST") {
-		$user = $_POST['user'];
-		$password = $_POST['password'];
 
-		$opera = $conn->query("SELECT * FROM usuarios WHERE user = '{$user}' and password = '{$password}'");
-		
-		if ($opera->rowCount()) {
-			$_SESSION['login_user'] = $user;
-			
-			header("location: welcome.php");
-			$comando = 'console.log("hgfhf");';
-			echo '<script>'. $comando . '</script>';
-			/* while ($row = $opera->fetch()) {
-				echo $row['user']."<br>";
-			} */
+	if ($_SERVER["REQUEST_METHOD"] == "POST") {
+	//parametros
+	$user = $_POST['user'];
+	$password = $_POST['password'];
+
+	//revision de usuario existente
+	$query = ("SELECT user FROM usuarios WHERE user = :user");
+
+	try {
+		$sql = $conn->prepare($query);
+		$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql->bindValue(":user", $user);
+		$sql->execute();
+		$usuario = $sql->fetchAll(\PDO::FETCH_ASSOC);
+	} catch (Exception $ex) {
+		echo errorMessage($ex->getMessage());
+	}
+
+	if (count($usuario) > 0 ) {
+		// si el usuario existe
+		$query = ("SELECT password FROM usuarios where user = :user AND password = :password");
+
+		try {
+		  $sql = $conn->prepare($query);
+		  $sql->bindValue(":user", $user);
+		  $sql->bindValue(":password", $password);	 
+		  $sql->execute();
+		  $userpass = $sql->fetchAll(\PDO::FETCH_ASSOC);
+		} catch (Exception $ex) {
+		  echo errorMessage($ex->getMessage());
+		}
+	 
+		if (count($userpass) > 0 ) {
+		 $_SESSION['login_user'] = $user;
+				
+				header("location: welcome.php");
+				$comando = 'console.log("inicio exitoso");';
+				echo '<script>'. $comando . '</script>';
+
+
 		} else {
 			$error = "your User or Password are incorrect";
 			echo "<script>alert('$error');</script>"; 
 		}
 	}
+}
 ?>
 
 
@@ -55,14 +82,14 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
 						</div>
-						<input type="text" name="user" class="form-control" placeholder="username"/>
+						<input type="text" name="user" class="form-control" placeholder="username" required="true"/>
 						
 					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" name="password" class="form-control" placeholder="password"/>
+						<input type="password" name="password" class="form-control" placeholder="password" required="true"/>
 					</div>
 					<div class="row align-items-center remember">
 						<input type="checkbox">Remember Me
