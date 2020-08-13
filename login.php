@@ -13,7 +13,6 @@
 	try {
 		$sql = $conn->prepare($query);
 		$conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql->bindValue(":user", $user);
 		$sql->execute();
 		$usuario = $sql->fetchAll(\PDO::FETCH_ASSOC);
